@@ -41,61 +41,70 @@ const Signup = () => {
 		navigate("/login");
 	};
 
-	//import { Link } from "react-router-dom";
-
-//const Signup = ({ handleSubmit, handleChange, signupData }) => {
-		return (
+	return (
 		<div style={styles.container}>
 			<div style={styles.card}>
-				<h2 style={styles.heading}>Signup</h2>
-				<form onSubmit={handleSubmit} style={styles.form}>
-					<input
-						type="text"
-						name="name"
-						placeholder="Name"
-						required
-						value={signupData.name}
-						onChange={handleChange}
-						style={styles.input}
-					/>
-					<input
-						type="email"
-						name="email"
-						placeholder="Email"
-						required
-						value={signupData.email}
-						onChange={handleChange}
-						style={styles.input}
-					/>
-					<input
-						type="password"
-						name="password"
-						placeholder="Password"
-						required
-						value={signupData.password}
-						onChange={handleChange}
-						style={styles.input}
-					/>
-					<input
-						type="password"
-						name="confirmPassword"
-						placeholder="Confirm Password"
-						required
-						value={signupData.confirmPassword}
-						onChange={handleChange}
-						style={styles.input}
-					/>
-					<button type="submit" style={styles.button}>
-						Signup
-					</button>
-				</form>
-				<p style={styles.linkText}>
-					Already have an account?{" "}
-					<Link to="/login" style={styles.link}>
-						Login
-					</Link>
-				</p>
+				<div style={styles.header}>Create Account</div>
+				<div style={styles.body}>
+					<h2 style={styles.heading}>Sign Up</h2>
+					<p style={styles.subheading}>Join our community today</p>
+					<form onSubmit={handleSubmit} style={styles.form}>
+						<input
+							type="text"
+							name="name"
+							placeholder="Full Name"
+							required
+							value={signupData.name}
+							onChange={handleChange}
+							style={styles.input}
+						/>
+						<input
+							type="email"
+							name="email"
+							placeholder="Email Address"
+							required
+							value={signupData.email}
+							onChange={handleChange}
+							style={styles.input}
+						/>
+						<input
+							type="password"
+							name="password"
+							placeholder="Password"
+							required
+							value={signupData.password}
+							onChange={handleChange}
+							style={styles.input}
+						/>
+						<input
+							type="password"
+							name="confirmPassword"
+							placeholder="Confirm Password"
+							required
+							value={signupData.confirmPassword}
+							onChange={handleChange}
+							style={styles.input}
+						/>
+						<button type="submit" style={styles.button}>
+							<span style={{ marginRight: 8 }}>➡</span> Sign Up
+						</button>
+					</form>
+					<p style={styles.linkText}>
+						Already have an account?{" "}
+						<Link to="/login" style={styles.link}>
+							Login
+						</Link>
+					</p>
+
+					<hr style={styles.hr} />
+					<p style={styles.terms}>
+						By signing up, you agree to our{" "}
+						<span style={styles.policyLink}>Terms of Service</span> and{" "}
+						<span style={styles.policyLink}>Privacy Policy</span>
+					</p>
+				</div>
 			</div>
+			<p style={styles.footer}>© 2025 All Rights Reserved</p>
 		</div>
 	);
 };
@@ -103,66 +112,101 @@ const Signup = () => {
 const styles = {
 	container: {
 		display: "flex",
-		justifyContent: "center",
+		flexDirection: "column",
 		alignItems: "center",
-		height: "100vh",
-		backgroundImage: "url('https://plus.unsplash.com/premium_photo-1720744786849-a7412d24ffbf?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YmxvZ3xlbnwwfHwwfHx8MA%3D%3D')", // Replace with your image URL
-		backgroundSize: "cover",
-		backgroundPosition: "center",
-		backgroundRepeat: "no-repeat",
-		padding: "20px"
+		justifyContent: "center",
+		minHeight: "100vh",
+		backgroundColor: "#f0f2f5",
+		padding: "20px",
 	},
 	card: {
-		textAlign: "center",
-		backgroundColor: "rgba(255, 255, 255, 0.95)", // Slight transparency for contrast
-		padding: "30px",
-		borderRadius: "12px",
-		boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
 		width: "100%",
 		maxWidth: "400px",
-		transition: "transform 0.3s"
+		backgroundColor: "#ffffff",
+		borderRadius: "12px",
+		overflow: "hidden",
+		boxShadow: "0 6px 20px rgba(0,0,0,0.1)",
+	},
+	header: {
+		backgroundColor: "#1976D2",
+		color: "white",
+		textAlign: "center",
+		fontWeight: "bold",
+		padding: "14px",
+		fontSize: "18px",
+	},
+	body: {
+		padding: "25px",
 	},
 	heading: {
-		color: "#1976D2",
+		fontSize: "22px",
 		fontWeight: "bold",
-		fontSize: "24px",
-		marginBottom: "15px"
+		marginBottom: "5px",
+		textAlign: "center",
+		color: "#333",
+	},
+	subheading: {
+		fontSize: "14px",
+		color: "#777",
+		textAlign: "center",
+		marginBottom: "20px",
 	},
 	form: {
 		display: "flex",
 		flexDirection: "column",
-		alignItems: "center",
-		gap: "15px"
+		gap: "14px",
 	},
 	input: {
 		padding: "12px",
-		width: "100%",
-		borderRadius: "8px",
+		borderRadius: "6px",
 		border: "1px solid #ccc",
-		boxShadow: "inset 0px 2px 4px rgba(0, 0, 0, 0.1)"
+		fontSize: "14px",
 	},
 	button: {
-		padding: "12px 25px",
+		padding: "12px",
 		backgroundColor: "#1976D2",
 		color: "white",
 		border: "none",
-		borderRadius: "8px",
-		cursor: "pointer",
-		fontSize: "16px",
+		borderRadius: "6px",
 		fontWeight: "bold",
-		boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.2)",
-		transition: "background-color 0.3s, transform 0.2s"
+		cursor: "pointer",
+		fontSize: "15px",
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "center",
+		transition: "background-color 0.3s",
 	},
 	linkText: {
-		marginTop: "15px",
-		fontSize: "14px",
-		color: "#333"
+		marginTop: "16px",
+		fontSize: "13px",
+		textAlign: "center",
+		color: "#555",
 	},
 	link: {
 		color: "#1976D2",
+		fontWeight: "bold",
 		textDecoration: "none",
-		fontWeight: "bold"
-	}
+	},
+	hr: {
+		margin: "20px 0 10px 0",
+		border: "none",
+		borderTop: "1px solid #ddd",
+	},
+	terms: {
+		fontSize: "12px",
+		color: "#888",
+		textAlign: "center",
+	},
+	policyLink: {
+		color: "#1976D2",
+		textDecoration: "underline",
+		cursor: "pointer",
+	},
+	footer: {
+		marginTop: "10px",
+		fontSize: "12px",
+		color: "#888",
+	},
 };
 
 export default Signup;

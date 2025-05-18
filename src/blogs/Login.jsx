@@ -7,22 +7,18 @@ import { setToken, setSignupData } from "../slice/authSlice";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 
-
 const Login = () => {
 	const [loginData, setLoginData] = useState({
 		email: "",
 		password: "",
 	});
-	
+
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	const handleChange = (e) => {
 		setLoginData({ ...loginData, [e.target.name]: e.target.value });
 	};
-
-	
-	
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -35,108 +31,163 @@ const Login = () => {
 		toast.success("Login successful");
 		dispatch(setToken(resData?.user?.token));
 		dispatch(setSignupData(resData?.user));
-		setLoginData({
-			email: "",
-			password: "",
-		});
-		navigate("/")
-		// Call backend API here
+		setLoginData({ email: "", password: "" });
+		navigate("/");
 	};
 
 	return (
-		<div style={styles.container}>
-			<h2 style={styles.heading}>Login</h2>
-			<form
-				onSubmit={handleSubmit}
-				style={styles.form}>
-				<input
-					type="email"
-					name="email"
-					placeholder="Email"
-					required
-					value={loginData.email}
-					onChange={handleChange}
-					style={styles.input}
-				/>
-				<input
-					type="password"
-					name="password"
-					placeholder="Password"
-					required
-					value={loginData.password}
-					onChange={handleChange}
-					style={styles.input}
-				/>
-				<button
-					type="submit"
-					style={styles.button}
-					onMouseOver={(e) => e.target.style.backgroundColor = "#125DA6"}
-					onMouseOut={(e) => e.target.style.backgroundColor = "#1976D2"}
-					onMouseDown={(e) => e.target.style.transform = "scale(0.98)"}
-					onMouseUp={(e) => e.target.style.transform = "scale(1)"}
-				>
-					Login
-				</button>
-			</form>
-			<p style={styles.linkText}>
-				Don’t have an account? <Link to="/signup" style={styles.link}>Signup</Link>
-			</p>
+		<div style={styles.wrapper}>
+			<div style={styles.card}>
+				<div style={styles.header}>Welcome Back</div>
+				<h2 style={styles.title}>Account Login</h2>
+				<p style={styles.subtitle}>Please enter your credentials to continue</p>
+
+				<form onSubmit={handleSubmit} style={styles.form}>
+					<div style={styles.inputGroup}>
+						<span style={styles.icon}>📧</span>
+						<input
+							type="email"
+							name="email"
+							placeholder="Email Address"
+							required
+							value={loginData.email}
+							onChange={handleChange}
+							style={styles.input}
+						/>
+					</div>
+
+					<div style={styles.inputGroup}>
+						<span style={styles.icon}>🔒</span>
+						<input
+							type="password"
+							name="password"
+							placeholder="Password"
+							required
+							value={loginData.password}
+							onChange={handleChange}
+							style={styles.input}
+						/>
+					</div>
+
+					<button type="submit" style={styles.button}>
+						<span style={{ marginRight: 8 }}>➡</span> Login
+					</button>
+				</form>
+
+				<p style={styles.signupText}>
+					Don’t have an account? <Link to="/signup" style={styles.link}>Sign Up</Link>
+				</p>
+
+				<div style={styles.footerLinks}>
+					<Link to="/forgot-password" style={styles.footerLink}>Forgot Password?</Link>
+					<span style={styles.divider}>|</span>
+					<Link to="/help" style={styles.footerLink}>Need Help?</Link>
+				</div>
+			</div>
+			<p style={styles.rights}>© 2025 All Rights Reserved</p>
 		</div>
 	);
 };
 
 const styles = {
-	container: { 
-		textAlign: "center", 
-		marginTop: "50px", 
-		backgroundColor: "#F5F5F5",
-		padding: "30px",
-		borderRadius: "10px",
-		boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-		width: "350px",
-		margin: "auto"
+	wrapper: {
+		display: "flex",
+		flexDirection: "column",
+		alignItems: "center",
+		justifyContent: "center",
+		minHeight: "100vh",
+		backgroundColor: "#f3f4f6",
+		fontFamily: "sans-serif"
 	},
-	heading: { 
-		color: "#1976D2", 
-		fontWeight: "bold", 
-		fontSize: "24px" 
+	card: {
+		width: "100%",
+		maxWidth: "400px",
+		backgroundColor: "#fff",
+		padding: "30px 20px",
+		borderRadius: "12px",
+		boxShadow: "0 10px 40px rgba(0,0,0,0.1)",
+		textAlign: "center"
+	},
+	header: {
+		backgroundColor: "#1976D2",
+		color: "white",
+		padding: "15px",
+		borderTopLeftRadius: "12px",
+		borderTopRightRadius: "12px",
+		margin: "-30px -20px 20px",
+		fontSize: "18px",
+		fontWeight: "bold"
+	},
+	title: {
+		fontSize: "20px",
+		fontWeight: "600",
+		marginBottom: "8px"
+	},
+	subtitle: {
+		fontSize: "14px",
+		color: "#666",
+		marginBottom: "20px"
 	},
 	form: {
 		display: "flex",
 		flexDirection: "column",
+		gap: "15px"
+	},
+	inputGroup: {
+		display: "flex",
 		alignItems: "center",
-		gap: "15px",
-		marginTop: "20px"
+		border: "1px solid #ccc",
+		borderRadius: "8px",
+		padding: "10px"
+	},
+	icon: {
+		marginRight: "8px",
+		fontSize: "16px"
 	},
 	input: {
-		padding: "12px",
+		border: "none",
+		outline: "none",
 		width: "100%",
-		borderRadius: "8px",
-		border: "1px solid #ccc",
-		boxShadow: "inset 0px 2px 4px rgba(0, 0, 0, 0.1)"
+		fontSize: "14px"
 	},
 	button: {
-		padding: "12px 25px",
 		backgroundColor: "#1976D2",
-		color: "white",
+		color: "#fff",
+		padding: "12px",
 		border: "none",
 		borderRadius: "8px",
 		cursor: "pointer",
 		fontSize: "16px",
 		fontWeight: "bold",
-		boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.2)",
-		transition: "background-color 0.3s, transform 0.2s"
+		boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)"
 	},
-	linkText: { 
-		marginTop: "15px", 
-		fontSize: "14px", 
-		color: "#333" 
+	signupText: {
+		marginTop: "16px",
+		fontSize: "14px"
 	},
-	
 	link: {
 		color: "#1976D2",
 		textDecoration: "none",
-		fontWeight: "bold"
+		fontWeight: "600"
+	},
+	footerLinks: {
+		display: "flex",
+		justifyContent: "center",
+		gap: "10px",
+		marginTop: "12px",
+		fontSize: "13px"
+	},
+	footerLink: {
+		color: "#666",
+		textDecoration: "none"
+	},
+	divider: {
+		color: "#aaa"
+	},
+	rights: {
+		marginTop: "15px",
+		fontSize: "12px",
+		color: "#888"
 	}
 };
 
